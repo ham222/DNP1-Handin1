@@ -1,0 +1,26 @@
+{
+  "Users": [
+    {
+      "Id": 1,
+      "Username": "Jakub",
+      "Password": null
+    },
+    {
+      "Id": 2,
+      "Username": "Stefan",
+      "Password": null
+    }
+  ],
+  "Posts": [
+    {
+      "Id": 1,
+      "Owner": {
+        "Id": 1,
+        "Username": "Jakub",
+        "Password": null
+      },
+      "Title": "First",
+      "Body": "This is jakub\u0027s first post"
+    }
+  ]
+}
