@@ -9,4 +9,6 @@ public interface IPostDAO
     Task<IEnumerable<Post>> GetAllAsync();
 
     Task<Post> GetByTitleAsync(string postTitle);
+
+    Task<Post> GetByIdAsync(int id);
 }

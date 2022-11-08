@@ -1,0 +1,36 @@
+﻿@page "/posts/{postNr:int}"
+@using HttpClients.ClientInterfaces
+@using Domain
+@inject IPostService _postService
+
+
+<h1>@_post.Title</h1>
+<h3>Author: @_post.Owner.Username</h3>
+<br/>
+<p>@_post.Body</p>
+
+@code {
+    [Parameter]
+    public int postNr { get; set; }
+
+    Post _post;
+
+    private async Task GetPost()
+    {
+        try
+        {
+            Post post = await _postService.GetById(postNr);
+            _post = post;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await GetPost();
+    }
+}

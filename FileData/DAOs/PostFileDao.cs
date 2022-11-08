@@ -39,4 +39,9 @@ public class PostFileDao :IPostDAO
     {
         throw new NotImplementedException();
     }
+
+    public Task<Post> GetByIdAsync(int id)
+    {
+        return Task.FromResult(_context.Posts.FirstOrDefault(post => post.Id == id))!;
+    }
 }

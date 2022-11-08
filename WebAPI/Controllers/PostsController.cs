@@ -38,4 +38,11 @@ public class PostsController:ControllerBase
         return Ok(posts);
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<Post>> GetPostByIdAsync(int id)
+    {
+        var post = await _postLogic.GetByIdAsync(id);
+        return Ok(post);
+    }
+
 }

@@ -5,9 +5,7 @@
 
 <PageTitle>Posts page</PageTitle>
 <h3>See all posts here: </h3>
-<div>
-    <button @onclick="LoadPosts">Load</button>
-</div>
+
 @if (_posts == null)
 {
 }
@@ -28,7 +26,9 @@ else
         @foreach (var post in _posts)
         {
             <tr>
-                <td>@post.Title</td>
+                <td>
+                    <a href="posts/@post.Id">@post.Title</a>
+                </td>
                 <td>@post.Owner.Username</td>
             </tr>
         }
@@ -39,6 +39,7 @@ else
 @code {
 
     IEnumerable<Post> _posts;
+
     private async Task LoadPosts()
     {
         try
@@ -48,7 +49,13 @@ else
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw new Exception(e.Message);  
+            throw new Exception(e.Message);
         }
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadPosts();
+    }
+
 }

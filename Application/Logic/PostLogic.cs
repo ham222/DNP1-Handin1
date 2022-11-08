@@ -36,6 +36,12 @@ public class PostLogic : IPostLogic
         return posts;
     }
 
+    public async Task<Post> GetByIdAsync(int id)
+    {
+        Post post = await _postDao.GetByIdAsync(id);
+        return post;
+    }
+
     private void ValidatePost(Post dto)
     {
         if ((string.IsNullOrEmpty(dto.Title))||(string.IsNullOrEmpty(dto.Body))) throw new Exception("Title and body must contain characters.");
