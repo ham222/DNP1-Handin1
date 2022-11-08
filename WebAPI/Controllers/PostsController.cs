@@ -31,4 +31,11 @@ public class PostsController:ControllerBase
         }
     }
 
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Post>>> GetAllAsync()
+    {
+        var posts = await _postLogic.GetAllAsync();
+        return Ok(posts);
+    }
+
 }

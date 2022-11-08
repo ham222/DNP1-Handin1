@@ -1,0 +1,54 @@
+﻿@page "/GetPosts"
+@using HttpClients.ClientInterfaces
+@using Domain
+@inject IPostService _postService
+
+<PageTitle>Posts page</PageTitle>
+<h3>See all posts here: </h3>
+<div>
+    <button @onclick="LoadPosts">Load</button>
+</div>
+@if (_posts == null)
+{
+}
+else if (!_posts.Any())
+{
+    <p>No posts. Try adding one!</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var post in _posts)
+        {
+            <tr>
+                <td>@post.Title</td>
+                <td>@post.Owner.Username</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    IEnumerable<Post> _posts;
+    private async Task LoadPosts()
+    {
+        try
+        {
+            _posts = await _postService.GetAllAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception(e.Message);  
+        }
+    }
+}

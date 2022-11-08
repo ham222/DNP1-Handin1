@@ -30,4 +30,18 @@ public class UsersController :ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+
+    [HttpGet]
+    public async Task<ActionResult<User>> GetByIdAsync([FromQuery]int id)
+    {
+        try
+        {
+            User u = await _userLogic.GetByIdAsync(id);
+            return Ok(u);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
 }

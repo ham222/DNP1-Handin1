@@ -29,7 +29,13 @@ public class PostLogic : IPostLogic
         Post created = await _postDao.CreateAsync(post);
         return created;
     }
-    
+
+    public async Task<IEnumerable<Post>> GetAllAsync()
+    {
+        IEnumerable<Post> posts = await _postDao.GetAllAsync();
+        return posts;
+    }
+
     private void ValidatePost(Post dto)
     {
         if ((string.IsNullOrEmpty(dto.Title))||(string.IsNullOrEmpty(dto.Body))) throw new Exception("Title and body must contain characters.");

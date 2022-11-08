@@ -30,6 +30,11 @@ public class PostFileDao :IPostDAO
         
     }
 
+    public Task<IEnumerable<Post>> GetAllAsync()
+    {
+        return Task.FromResult<IEnumerable<Post>>(_context.Posts);
+    }
+
     public Task<Post> GetByTitleAsync(string postTitle)
     {
         throw new NotImplementedException();
