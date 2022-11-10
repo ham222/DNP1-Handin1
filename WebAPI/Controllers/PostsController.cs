@@ -21,7 +21,7 @@ public class PostsController:ControllerBase
     {
         try
         {
-            Post created = await _postLogic.CreateAsync(dto);
+            var created = await _postLogic.CreateAsync(dto);
             return Created($"/posts/{created.Id}", created);
         }
         catch (Exception e)
@@ -44,5 +44,5 @@ public class PostsController:ControllerBase
         var post = await _postLogic.GetByIdAsync(id);
         return Ok(post);
     }
-
+    
 }

@@ -1,5 +1,7 @@
-﻿using System.Text.Json;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Domain;
+using Domain.DTOs;
 using HttpClients.ClientInterfaces;
 
 namespace HttpClients.Implementations;
@@ -43,5 +45,22 @@ public class PostHttpClient:IPostService
             PropertyNameCaseInsensitive = true
         })!;
         return post;
+    }
+
+    public async Task<Post> GetByTitle(string title)
+    {
+        ICollection<Post> all = await GetAllAsync();
+        Post p = all.FirstOrDefault(post => post.Title.Equals(title))!;
+        return p;
+    }
+
+    public async Task CreateAsync(PostCreationDto dto)
+    {
+        HttpResponseMessage responseMessage = await _client.PostAsJsonAsync("/posts", dto);
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            string content = await responseMessage.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
     }
 }

@@ -37,7 +37,7 @@ public class PostFileDao :IPostDAO
 
     public Task<Post> GetByTitleAsync(string postTitle)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_context.Posts.FirstOrDefault(post => post.Title.Equals(postTitle)))!;
     }
 
     public Task<Post> GetByIdAsync(int id)

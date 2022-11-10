@@ -10,4 +10,6 @@ public interface IPostLogic
     Task<IEnumerable<Post>> GetAllAsync();
 
     Task<Post> GetByIdAsync(int id);
+
+    Task<Post> GetByTitleAsync(string title);
 }
