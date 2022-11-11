@@ -4,7 +4,33 @@
       "Id": 1,
       "Username": "Jakub",
       "Password": "password"
+    },
+    {
+      "Id": 2,
+      "Username": "AlsoJakub",
+      "Password": "password"
     }
   ],
-  "Posts": []
+  "Posts": [
+    {
+      "Id": 1,
+      "Owner": {
+        "Id": 1,
+        "Username": "Jakub",
+        "Password": "password"
+      },
+      "Title": "Bro",
+      "Body": "This app will earn us billions, just trust me"
+    },
+    {
+      "Id": 2,
+      "Owner": {
+        "Id": 2,
+        "Username": "AlsoJakub",
+        "Password": "password"
+      },
+      "Title": "This is my first post",
+      "Body": "I hope you like it :-)"
+    }
+  ]
 }

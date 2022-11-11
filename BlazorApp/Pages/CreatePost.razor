@@ -3,46 +3,75 @@
 @using HttpClients.ClientInterfaces
 @using Domain.DTOs
 @using Domain
+@using System.Security.Claims
 @inject IPostService PostService
-@inject IJSRuntime JsRuntime
+@inject IUserService UserService
+
 
 <h3>Write a new post!</h3>
+<AuthorizeView>
+    <Authorized>
+        <div class="card col-12">
+            <form>
+                <div class="col-12 offset-5 my-4">
+                    <label for="title">Title: </label>
+                    <input type="text" id="title" name="title" @bind="title" @bind:event="oninput"/>
+                </div>
+                <div class="col-12 offset-4">
+                    <label for="body">Body</label>
+                    <textarea id="body" name="body" placeholder="Feeling creative today?" @bind="body" @bind:event="oninput"> </textarea>
+                </div>
 
-<div class="card col-12">
-    <form>
-        <div class="col-12 offset-5 my-4">
-            <label for="title">Title: </label>
-            <input type="text" id="title" name="title" @bind="title" @bind:event="oninput"/>
-        </div>
-        <div class="col-12 offset-4">
-            <label for="body">Body</label>
-            <textarea id="body" name="body" placeholder="Feeling creative today?" @bind="body" @bind:event="oninput"> </textarea>
-        </div>
+            </form>
+            <div class="button-row col-12 offset-6 my-3">
 
-    </form>
-    <div class="button-row col-12 offset-6 my-3">
-        <button @onclick="Create" disabled="@((string.IsNullOrEmpty(title)) || (string.IsNullOrEmpty(body)))" class="acceptbtn">Create</button>
-    </div>
-</div>
+                <button @onclick="Create" disabled="@((string.IsNullOrEmpty(title)) || (string.IsNullOrEmpty(body)))" class="acceptbtn">Create</button>
+            </div>
+        </div>
+    </Authorized>
+</AuthorizeView>
+
 
 @code {
-    string title;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private IEnumerable<Claim> claims;
+    private ClaimsPrincipal user;
+    string? title;
     string body;
 
     private async Task Create()
     {
+
         try
         {
             var p = await PostService.GetByTitle(title);
             Console.WriteLine(p.Id);
-            await PostService.CreateAsync(new PostCreationDto(3, title, body));
-            //await JsRuntime.InvokeVoidAsync("open", $"/posts/{p.Id}");
+    /*
+             * This app will earn us billions, just trust me
+             */
+            await PostService.CreateAsync(new PostCreationDto(2, title, body));
+    //await JsRuntime.InvokeVoidAsync("open", $"/posts/{p.Id}");
         }
         catch (Exception e)
         {
+            await PostService.CreateAsync(new PostCreationDto(2, title, body));
             Console.WriteLine(e);
-            throw;
+    //throw;
         }
+        
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        user = authState.User;
+        if (user.Identity == null) return;
+
+        claims = user.Claims;
     }
 
 }
