@@ -32,7 +32,7 @@
                 <button class="loginbtn" @onclick="LoginAsync">Log in</button>
             </div>
             <div class="col-12 card-footer">
-                <h4>If you don't have an account, you can register <a href="CreateUser">here</a></h4>
+                <div class="col-12"><h4>If you don't have an account, you can register <a href="CreateUser">here</a></h4></div>
             </div>
         </div>
         
@@ -40,6 +40,8 @@
     <Authorized>
         <div class="card">
             <h3>Hello, @context.User.Identity!.Name</h3>
+            <div class="card-footer"><button class="loginbtn" @onclick="LoginAsync">Log out</button></div>
+            
         </div>
     </Authorized>
 </AuthorizeView>
@@ -50,25 +52,7 @@
     private string resultMsg = "";
     private string errorLabel = "";
     private string color = "";
-
-    private async Task Create()
-    {
-        resultMsg = "";
-
-        try
-        {
-            await userService.Create(new UserCreationDto(username, password));
-            username = "";
-            resultMsg = "User successfully created";
-            color = "green";
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            resultMsg = e.Message;
-            color = "red";
-        }
-    }
+    
 
     private async Task LoginAsync()
     {
@@ -83,6 +67,12 @@
             Console.WriteLine(e);
             errorLabel = $"Error: {e.Message}";
         }
+    }
+    
+    private async Task Logout()
+    {
+        await authService.LogoutAsync();
+        navMgr.NavigateTo("/");
     }
 
 }

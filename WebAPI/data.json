@@ -1,8 +1,10 @@
 {
   "Users": [
-    
+    {
+      "Id": 1,
+      "Username": "Jakub",
+      "Password": "password"
+    }
   ],
-  "Posts": [
-    
-  ]
+  "Posts": []
 }
