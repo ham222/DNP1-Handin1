@@ -43,6 +43,11 @@ public class UserLogic : IUserLogic
         return _userDao.GetByUsernameAsync(username);
     }
 
+    public Task<IEnumerable<User>> GetAllAsync()
+    {
+        return _userDao.GetAllAsync();
+    }
+
     private void ValidateUsername(UserCreationDto dto)
     {
         if (dto.Username.Length < 3)

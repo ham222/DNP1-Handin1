@@ -1,76 +1,8 @@
 {
   "Users": [
-    {
-      "Id": 1,
-      "Username": "Jakub",
-      "Password": null
-    },
-    {
-      "Id": 2,
-      "Username": "Stefan",
-      "Password": null
-    },
-    {
-      "Id": 3,
-      "Username": "Mikkele",
-      "Password": "twojastarasradogara2115sbm"
-    },
-    {
-      "Id": 4,
-      "Username": "Michal",
-      "Password": "password"
-    }
+    
   ],
   "Posts": [
-    {
-      "Id": 1,
-      "Owner": {
-        "Id": 3,
-        "Username": "Mikkele",
-        "Password": "twojastarasradogara2115sbm"
-      },
-      "Title": "dsadasd",
-      "Body": "ye"
-    },
-    {
-      "Id": 2,
-      "Owner": {
-        "Id": 3,
-        "Username": "Mikkele",
-        "Password": "twojastarasradogara2115sbm"
-      },
-      "Title": "bb",
-      "Body": "aaaa"
-    },
-    {
-      "Id": 3,
-      "Owner": {
-        "Id": 3,
-        "Username": "Mikkele",
-        "Password": "twojastarasradogara2115sbm"
-      },
-      "Title": "aaaaaaaaaaaa",
-      "Body": "sss"
-    },
-    {
-      "Id": 4,
-      "Owner": {
-        "Id": 3,
-        "Username": "Mikkele",
-        "Password": "twojastarasradogara2115sbm"
-      },
-      "Title": "new",
-      "Body": "does it work?"
-    },
-    {
-      "Id": 5,
-      "Owner": {
-        "Id": 3,
-        "Username": "Mikkele",
-        "Password": "twojastarasradogara2115sbm"
-      },
-      "Title": "new",
-      "Body": "does it work?"
-    }
+    
   ]
 }

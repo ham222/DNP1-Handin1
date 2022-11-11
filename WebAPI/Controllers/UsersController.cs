@@ -31,8 +31,8 @@ public class UsersController :ControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<ActionResult<User>> GetByIdAsync([FromQuery]int id)
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<User>> GetByIdAsync(int id)
     {
         try
         {
@@ -43,5 +43,12 @@ public class UsersController :ControllerBase
         {
             return StatusCode(500, e.Message);
         }
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Post>>> GetAllAsync()
+    {
+        var posts = await _userLogic.GetAllAsync();
+        return Ok(posts);
     }
 }

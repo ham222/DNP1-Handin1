@@ -30,4 +30,20 @@ public class UserHttpClient:IUserService
         })!;
         return user;
     }
+    
+    public async Task<ICollection<User>> GetAllAsync()
+    {
+        HttpResponseMessage responseMessage = await _client.GetAsync("/users");
+        string content = await responseMessage.Content.ReadAsStringAsync();
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(content);
+        }
+
+        ICollection<User> users = JsonSerializer.Deserialize<ICollection<User>>(content, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return users;
+    }
 }

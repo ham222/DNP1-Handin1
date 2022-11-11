@@ -11,4 +11,5 @@ public interface IUserLogic
 
     public Task<User> GetByUsernameAsync(string username);
 
+    Task<IEnumerable<User>> GetAllAsync();
 }

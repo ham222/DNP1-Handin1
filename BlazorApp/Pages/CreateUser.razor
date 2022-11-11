@@ -1,29 +1,37 @@
 ﻿@page "/CreateUser"
 @using Domain.DTOs
 @using HttpClients.ClientInterfaces
+@using BlazorApp.Services
 @inject IUserService userService;
 
+<h3>You can register a new account here</h3>
 
 <div class="card">
-    <h3>Create User</h3>
-    <div class="form-group field">
-        <label>User name:</label>
-        <input type="text" @bind="username" @bind:event="oninput"/>
-        @if (!string.IsNullOrEmpty(resultMsg))
-        {
-            <label style="color: @color">@resultMsg</label>
-        }
-        <label>Password:</label>
-        <input type="password" @bind="password" @bind:event="oninput"/>
-        @if (!string.IsNullOrEmpty(resultMsg))
-        {
-            <label style="color: @color">@resultMsg</label>
-        }
-    </div>
-    <div class="button-row">
-        <button @onclick="Create" disabled="@((string.IsNullOrEmpty(username)) || (string.IsNullOrEmpty(password)))" class="acceptbtn">Create</button>
-    </div>
-</div>
+            <h3>Create User</h3>
+            <div class="card">
+                <div class="form-group field">
+                    <div class="col-12">
+                        <label>User name:</label>
+                        <input type="text" @bind="username" @bind:event="oninput"/>
+                        @if (!string.IsNullOrEmpty(resultMsg))
+                        {
+                            <label style="color: @color">@resultMsg</label>
+                        }
+                    </div>
+                    <div class="col-12">
+                        <label>Password:</label>
+                        <input type="password" @bind="password" @bind:event="oninput"/>
+                        @if (!string.IsNullOrEmpty(resultMsg))
+                        {
+                            <label style="color: @color">@resultMsg</label>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="button-row">
+                <button @onclick="Create" disabled="@((string.IsNullOrEmpty(username)) || (string.IsNullOrEmpty(password)))" class="acceptbtn">Create</button>
+            </div>
+        </div>
 
 @code {
     private string username = "";
@@ -49,5 +57,4 @@
             color = "red";
         }
     }
-
 }

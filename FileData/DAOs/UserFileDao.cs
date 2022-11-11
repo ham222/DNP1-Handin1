@@ -44,4 +44,9 @@ public class UserFileDao :IUserDAO
         );
         return Task.FromResult(existing);
     }
+
+    public Task<IEnumerable<User>> GetAllAsync()
+    {
+        return Task.FromResult<IEnumerable<User>>(_context.Users);
+    }
 }
