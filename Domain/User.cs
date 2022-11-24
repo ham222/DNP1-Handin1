@@ -1,4 +1,6 @@
-﻿namespace Domain;
+﻿using System.Text.Json.Serialization;
+
+namespace Domain;
 
 public class User
 {
@@ -6,4 +8,6 @@ public class User
     public string Username { get; set; }
     
     public string Password { get; set; }
+    [JsonIgnore]
+    public ICollection<Post> Posts { get; set; }
 }
