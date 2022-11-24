@@ -7,9 +7,9 @@ namespace EfcDataAccess.DAOs;
 
 public class UserEfcDao : IUserDAO
 {
-    private readonly PostContext _context;
+    private readonly EfcContext _context;
 
-    public UserEfcDao(PostContext context)
+    public UserEfcDao(EfcContext context)
     {
         _context = context;
     }

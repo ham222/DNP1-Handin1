@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EfcDataAccess;
 
-public class PostContext:DbContext
+public class EfcContext:DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Post> Posts { get; set; }

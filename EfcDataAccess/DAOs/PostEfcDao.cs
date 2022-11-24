@@ -8,35 +8,35 @@ namespace EfcDataAccess.DAOs;
 public class PostEfcDao : IPostDAO
 {
 
-    private readonly PostContext _postContext;
+    private readonly EfcContext _efcContext;
     
-    public PostEfcDao(PostContext postContext)
+    public PostEfcDao(EfcContext efcContext)
     {
-        _postContext = postContext;
+        _efcContext = efcContext;
     }
     
     public async Task<Post> CreateAsync(Post post)
     {
-        EntityEntry<Post> added = await _postContext.Posts.AddAsync(post);
-        await _postContext.SaveChangesAsync();
+        EntityEntry<Post> added = await _efcContext.Posts.AddAsync(post);
+        await _efcContext.SaveChangesAsync();
         return added.Entity;
     }
 
     public async Task<IEnumerable<Post>> GetAllAsync()
     {
-        IEnumerable<Post> posts = _postContext.Posts;
+        IEnumerable<Post> posts = _efcContext.Posts;
         return posts;
     }
 
     public async Task<Post> GetByTitleAsync(string postTitle)
     {
-        Post? existing = await _postContext.Posts.FirstOrDefaultAsync(p => p.Title.ToLower().Equals(postTitle.ToLower()));
+        Post? existing = await _efcContext.Posts.FirstOrDefaultAsync(p => p.Title.ToLower().Equals(postTitle.ToLower()));
         return existing;
     }
 
     public async Task<Post> GetByIdAsync(int id)
     {
-        Post? existing = await _postContext.Posts.FirstOrDefaultAsync(p => p.Id == id);
+        Post? existing = await _efcContext.Posts.FirstOrDefaultAsync(p => p.Id == id);
         return existing;
     }
 }
